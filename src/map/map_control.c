@@ -12,6 +12,7 @@
 
 #include "../cub3d.h"
 #include <stdio.h>
+#include "../libft/libft.h"
 
 void	init_struct2(t_map *map)
 {
@@ -52,18 +53,18 @@ void	init_struct(t_map *map)
 	init_struct2(map);
 }
 
-void	travel_map(t_map *map, int y, int x)
+void travel_map(t_map *map, int y, int x)
 {
-	if (x < 0 || y < 0 || y >= map->map_height || map->tmp_map[y][x] == ' '
-		|| map->tmp_map[y][x] == '\0')
-		ft_err_mapcontrol("Wrong map", map, 1);
-	else if (map->tmp_map[y][x] == '1')
-		return ;
-	map->tmp_map[y][x] = '1';
-	travel_map(map, y, x - 1);
-	travel_map(map, y - 1, x);
-	travel_map(map, y, x + 1);
-	travel_map(map, y + 1, x);
+    if (x < 0 || y < 0 || y >= map->map_height || x >= (int)ft_strlen(map->tmp_map[y]) 
+        || map->tmp_map[y][x] == ' ' || map->tmp_map[y][x] == '\0')
+        ft_err_mapcontrol("Wrong map", map, 1);
+    else if (map->tmp_map[y][x] == '1')
+    	return;
+    map->tmp_map[y][x] = '1';
+    travel_map(map, y, x - 1);
+    travel_map(map, y - 1, x);
+    travel_map(map, y, x + 1);
+    travel_map(map, y + 1, x);
 }
 
 void	map_control(t_map *map)

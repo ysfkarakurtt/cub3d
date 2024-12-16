@@ -92,7 +92,7 @@ int	ft_err_mapcontrol(char *str, t_map *map, int status)
 		err_print_exit(str);
 	if (map->one_line_map)
 		free(map->one_line_map);
-	if (map->tmp_map)
+	if (map->tmp_map != NULL)
 		free_array2d(map->tmp_map);
 	if (map->map)
 		free_array2d(map->map);

@@ -18,16 +18,17 @@ void	free_array2d(char **str)
 {
 	int	i;
 
-	if (str == NULL)
+	if (!str)
 		return ;
 	i = 0;
-	while (str[i] != NULL)
+	while (str && str[i] != NULL)
 	{
 		free(str[i]);
 		str[i] = NULL;
 		i++;
 	}
-	free(str);
+	if (str && str[i] == NULL)
+		free(str);
 	str = NULL;
 }
 

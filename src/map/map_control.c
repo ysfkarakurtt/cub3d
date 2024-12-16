@@ -28,6 +28,7 @@ void	init_struct2(t_map *map)
 	map->map = NULL;
 	map->tmp_map = NULL;
 	map->map_buff = NULL;
+	map->map_file = NULL;
 }
 
 void	init_struct(t_map *map)
@@ -70,9 +71,9 @@ void	map_control(t_map *map)
 	int	directions_end;
 
 	directions_end = 0;
+	init_struct(map);
 	mapread(map);
 	map_size(map);
-	init_struct(map);
 	directions_end = map_sixthcontrol(map);
 	skip_spaces(map, directions_end);
 	func(map);

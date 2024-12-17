@@ -33,7 +33,10 @@ void	mapread(t_map *map)
 
 	map->map_file_fd = open(map->map_file_path, O_RDONLY);
 	if (map->map_file_fd == -1)
+	{
+		flag_free(map);
 		err_print_exit("Failed to open map file");
+	}
 	map->one_line_map = NULL;
 	while (1)
 	{

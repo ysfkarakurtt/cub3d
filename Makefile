@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 SRCS =  ./src/main.c ./src/map/utils_and_free2.c ./src/map/map_control.c ./src/map/map_buff_read.c \
 		./src/map/map_directions_parser_buff.c ./src/map/map_control_utils.c ./src/map/map_control_utils2.c \
 		./src/map/map_directions_parser.c ./src/map/map_directions_parser2.c ./src/map/real_map.c \

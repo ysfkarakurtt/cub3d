@@ -70,6 +70,8 @@ void	ray_init(t_game *game)
 	game->p->posx = game->map->pos_x + 0.5;
 	game->p->posy = game->map->pos_y + 0.5;
 	game->p->player_speed = 0.08;
+	if (game->p->player_speed > 1.02)
+		game->p->player_speed = 0.08;
 	game->p->rot_speed = 0.04;
 	game->p->w = false;
 	game->p->a = false;

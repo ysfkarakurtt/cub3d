@@ -156,8 +156,6 @@ int				take_rgb_color(char *str, t_map *map);
 void			is_digit_color(char *tmp, char **str, t_map *map);
 void			free_array2d(char **str);
 void			create_tmp_map(t_map *map);
-void			func(t_map *map);
-void			func2(t_map *map);
 int				count_comma(char *str);
 void			movement_2(t_game *game);
 void			find_height_real_map(t_map *map);

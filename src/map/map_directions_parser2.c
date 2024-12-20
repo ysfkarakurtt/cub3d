@@ -24,7 +24,7 @@ int	space_control(t_map *map, int i)
 	{
 		if (!(map->map_file[i][j] == ' ' || map->map_file[i][j] == '\n'))
 		{
-			printf("eror message");
+			printf(" Space Error Message ! ");
 			return (0);
 		}
 		j++;

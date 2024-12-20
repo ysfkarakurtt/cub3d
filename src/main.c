@@ -65,16 +65,11 @@ void	render_column(t_game *game, int x, int y)
 static void	init_flag(t_map *map)
 {
 	t_flags	*flags;
-	t_flags	*buff_flags;
 
 	flags = (t_flags *)malloc(sizeof(t_flags));
 	if (!flags)
 		ft_err_mapcontrol("Flags malloc error", map, 1);
-	buff_flags = (t_flags *)malloc(sizeof(t_flags));
-	if (!buff_flags)
-		ft_err_mapcontrol("Flags malloc error", map, 1);
 	map->flags = flags;
-	map->buff_flags = buff_flags;
 }
 
 int	main(int ac, char **av)

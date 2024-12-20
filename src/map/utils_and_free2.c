@@ -39,11 +39,6 @@ void	flag_free(t_map *map)
 		free(map->flags);
 		map->flags = NULL;
 	}
-	if (map->buff_flags)
-	{
-		free(map->buff_flags);
-		map->buff_flags = NULL;
-	}
 }
 
 int	all_spaces(char *str)

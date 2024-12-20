@@ -98,8 +98,6 @@ int	ft_err_mapcontrol(char *str, t_map *map, int status)
 		free_array2d(map->map);
 	if (map->map_file)
 		free_array2d(map->map_file);
-	if (map->map_buff)
-		free_array2d(map->map_buff);
 	if (map->ea_tex_path)
 		free(map->ea_tex_path);
 	if (map->no_tex_path)

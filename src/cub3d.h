@@ -83,14 +83,11 @@ typedef struct s_map
 	char	*we_tex_path;
 	char	**map;
 	char	**tmp_map;
-	char	**map_buff;
 	int		pos_x;
 	int		pos_y;
 	int		f_color;
 	int		c_color;
 	t_flags	*flags;
-	t_flags	*buff_flags;
-	int		buff_endofflag;
 }			t_map;
 
 typedef struct s_ray
@@ -139,17 +136,11 @@ typedef struct s_game
 int				ft_exit(char *str, t_game *game, int status);
 void			map_control(t_map *map);
 int				map_so_control(t_map *map, int i);
-int				map_so_control_buff(t_map *map, int i);
 int				map_no_control(t_map *map, int i);
-int				map_no_control_buff(t_map *map, int i);
 int				map_ea_control(t_map *map, int i);
-int				map_ea_control_buff(t_map *map, int i);
 int				map_we_control(t_map *map, int i);
-int				map_we_control_buff(t_map *map, int i);
 int				map_f_control(t_map *map, int i);
-int				map_f_control_buff(t_map *map, int i);
 int				map_c_control(t_map *map, int i);
-int				map_c_control_buff(t_map *map, int i);
 char			*get_next_line(int fd);
 void			err_print_exit(char *str);
 char			*texture_path_handler(char *str);

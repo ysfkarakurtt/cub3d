@@ -28,26 +28,18 @@ void	init_struct2(t_map *map)
 	map->so_tex_path = NULL;
 	map->map = NULL;
 	map->tmp_map = NULL;
-	map->map_buff = NULL;
 	map->map_file = NULL;
 }
 
 void	init_struct(t_map *map)
 {
 	map->flags->c_flag = 0;
-	map->buff_flags->c_flag = 0;
 	map->flags->f_flag = 0;
-	map->buff_flags->f_flag = 0;
 	map->flags->ea_flag = 0;
-	map->buff_flags->ea_flag = 0;
 	map->flags->flag_count = 0;
-	map->buff_flags->flag_count = 0;
 	map->flags->we_flag = 0;
-	map->buff_flags->we_flag = 0;
 	map->flags->no_flag = 0;
-	map->buff_flags->no_flag = 0;
 	map->flags->so_flag = 0;
-	map->buff_flags->so_flag = 0;
 	map->flags->if_flag = 0;
 	map->map_start = 0;
 	init_struct2(map);
@@ -80,8 +72,6 @@ void	map_control(t_map *map)
 	map_size(map);
 	directions_end = map_sixthcontrol(map);
 	skip_spaces(map, directions_end);
-	func(map);
-	func2(map);
 	read_real_map(map);
 	check_real_map(map);
 	check_real_map_counts(map);

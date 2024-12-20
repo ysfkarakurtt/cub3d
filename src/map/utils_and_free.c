@@ -107,8 +107,8 @@ int	ft_err_mapcontrol(char *str, t_map *map, int status)
 	if (map->we_tex_path)
 		free(map->we_tex_path);
 	flag_free(map);
-	printf("%s%s%s\n", YELLOW, str, RESET);
 	if (status == 1)
 		printf("%sError%s\n", RED, RESET);
+	printf("%s%s%s\n", YELLOW, str, RESET);
 	exit(status);
 }

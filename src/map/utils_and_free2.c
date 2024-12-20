@@ -55,7 +55,7 @@ int	all_spaces(char *str)
 
 void	err_print_exit(char *str)
 {
-	printf("%s%s%s\n%sError%s\n", YELLOW, str, RESET, RED, RESET);
+	printf("%sError\n%s%s%s%s\n", RED, RESET, YELLOW, str, RESET);
 	exit(1);
 }
 

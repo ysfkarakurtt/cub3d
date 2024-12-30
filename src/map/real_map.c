@@ -12,7 +12,6 @@
 
 #include "../cub3d.h"
 #include "../libft/libft.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 void	read_real_map(t_map *map)

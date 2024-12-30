@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
 #include "../libft/libft.h"
 
 void	init_struct2(t_map *map)

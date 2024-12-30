@@ -84,7 +84,7 @@ void	ray_init(t_game *game)
 int	key_press(int keyCode, t_game *game)
 {
 	if (keyCode == KEY_EXIT)
-		ft_exit("exit successful", game, 0);
+		ft_exit("exit successful\n", game, 0);
 	if (keyCode == KEY_W)
 		game->p->w = true;
 	if (keyCode == KEY_S)

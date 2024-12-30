@@ -10,10 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../cub3d.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 static unsigned int	ft_word_counter(const char *s, char control)
 {

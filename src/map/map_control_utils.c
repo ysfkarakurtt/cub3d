@@ -13,7 +13,6 @@
 #include "../cub3d.h"
 #include "../libft/libft.h"
 #include <fcntl.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 static void	all_map_control(t_map *map, int i)

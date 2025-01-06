@@ -22,7 +22,7 @@ static void	check_arg(int ac, char *av, t_game *game)
 	if (ac != 2)
 		ft_exit("Wrong number of arguments", game, 1);
 	i = ft_strlen(av);
-	if (i < 5)
+	if (i < 10)
 		ft_exit("Wrong file name", game, 1);
 	if (av[i - 1] != 'b' || av[i - 2] != 'u'
 		|| av[i - 3] != 'c' || av[i - 4] != '.')

@@ -91,7 +91,7 @@ int	map_sixthcontrol(t_map *map)
 	}
 	if (map->flags->flag_count != 6)
 		ft_err_mapcontrol("map have not 6 direction", map, 1);
-	if (newline_control(map, j) == 0)
+	if (wrong_name(map, j) == 0)
 		ft_err_mapcontrol("direction partition error", map, 1);
 	return (j);
 }

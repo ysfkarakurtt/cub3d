@@ -144,7 +144,7 @@ int				map_c_control(t_map *map, int i);
 char			*get_next_line(int fd);
 void			err_print_exit(char *str);
 char			*texture_path_handler(char *str);
-int				newline_control(t_map *map, int i);
+int				wrong_name(t_map *map, int i);
 int				space_control(t_map *map, int i);
 char			*color_path_handler(char *str);
 int				check_line_dir(char *map);

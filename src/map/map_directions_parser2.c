@@ -60,7 +60,7 @@ int	check_line_dir(char *map)
 	return (1);
 }
 
-int	newline_control(t_map *map, int i)
+int	wrong_name(t_map *map, int i)
 
 {
 	int	j;

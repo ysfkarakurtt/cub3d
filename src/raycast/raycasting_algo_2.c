@@ -1,39 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast2.c                                         :+:      :+:    :+:   */
+/*   raycasting_algo_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egermen <egermen@student.42kocaeli.com.tr>  #+#  +:+       +#+       */
+/*   By: ykarakur <ykarakur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-07 11:20:29 by egermen           #+#    #+#             */
-/*   Updated: 2024-12-07 11:20:29 by egermen          ###   ########.fr       */
+/*   Created: 2025/01/30 21:45:25 by ykarakur          #+#    #+#             */
+/*   Updated: 2025/01/30 21:45:26 by ykarakur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static bool	south_north(t_game *game)
-{
-	if (game->map->direction == 'S')
-	{
-		game->p->dirx = 0;
-		game->p->diry = 1;
-		game->planex = -0.66;
-		game->planey = 0;
-		return (true);
-	}
-	else if (game->map->direction == 'N')
-	{
-		game->p->dirx = 0;
-		game->p->diry = -1.00;
-		game->planex = 0.66;
-		game->planey = 0;
-		return (true);
-	}
-	return (false);
-}
-
-static bool	east_west(t_game *game)
+static bool east_west(t_game *game)
 {
 	if (game->map->direction == 'W')
 	{
@@ -54,7 +33,28 @@ static bool	east_west(t_game *game)
 	return (false);
 }
 
-bool	check_player(t_game *game)
+static bool south_north(t_game *game)
+{
+	if (game->map->direction == 'S')
+	{
+		game->p->dirx = 0;
+		game->p->diry = 1;
+		game->planex = -0.66;
+		game->planey = 0;
+		return (true);
+	}
+	else if (game->map->direction == 'N')
+	{
+		game->p->dirx = 0;
+		game->p->diry = -1.00;
+		game->planex = 0.66;
+		game->planey = 0;
+		return (true);
+	}
+	return (false);
+}
+
+bool player_checking(t_game *game)
 {
 	if (east_west(game))
 		return (true);
@@ -63,10 +63,10 @@ bool	check_player(t_game *game)
 	return (false);
 }
 
-void	ray_init(t_game *game)
+void init_raycast(t_game *game)
 {
-	if (!check_player(game))
-		return ((void)(ft_exit("Error in check player \n", game, 1)));
+	if (!player_checking(game))
+		return ((void)(exiting("Error in check player \n", game, 1)));
 	game->p->posx = game->map->pos_x + 0.5;
 	game->p->posy = game->map->pos_y + 0.5;
 	game->p->player_speed = 0.05;
@@ -81,10 +81,10 @@ void	ray_init(t_game *game)
 	game->p->right = false;
 }
 
-int	key_press(int keyCode, t_game *game)
+int key_press(int keyCode, t_game *game)
 {
 	if (keyCode == KEY_EXIT)
-		ft_exit("exit successful\n", game, 0);
+		exiting("exit successful\n", game, 0);
 	if (keyCode == KEY_W)
 		game->p->w = true;
 	if (keyCode == KEY_S)

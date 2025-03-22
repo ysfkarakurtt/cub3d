@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_control_utils3.c                               :+:      :+:    :+:   */
+/*   controller_map_utils_3.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mustyilm <mustyilm@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: ykarakur <ykarakur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:22:07 by egermen           #+#    #+#             */
-/*   Updated: 2024/12/08 20:45:48 by mustyilm         ###   ########.fr       */
+/*   Created: 2025/01/30 21:35:07 by ykarakur          #+#    #+#             */
+/*   Updated: 2025/01/30 21:35:08 by ykarakur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include <unistd.h>
+#include <fcntl.h>
 
-int	count_comma(char *str)
+int comma_counter(char *data)
 {
-	int	i;
-	int	count;
+	int count;
+	int i;
 
-	i = 0;
 	count = 0;
-	while (str[i])
+	i = 0;
+	while (data[i])
 	{
-		if (str[i] == ',')
+		if (data[i] == ',')
 		{
 			count++;
-			if (str[i + 1] == ',')
+			if (data[i + 1] == ',')
 				return (-1);
 		}
 		i++;
@@ -33,9 +33,9 @@ int	count_comma(char *str)
 	return (count);
 }
 
-int	is_valid_file(char *path)
+int is_available_file(char *path)
 {
-	int	fd;
+	int fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
@@ -47,27 +47,27 @@ int	is_valid_file(char *path)
 	}
 }
 
-int	skip_first_spaces(char *str)
+int space_jump_first(char *data)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	while (str[i] && str[i] != ' ')
+	while (data[i] && data[i] != ' ')
 		i++;
-	while (str[i] && str[i] == ' ')
+	while (data[i] && data[i] == ' ')
 		i++;
 	return (i);
 }
 
-void	copy_string(char *ret_path, const char *str)
+void str_copy(char *path, const char *data)
 {
-	int	i;
+	int a;
 
-	i = 0;
-	while (str[i] != '\0')
+	a = 0;
+	while (data[a] != '\0')
 	{
-		ret_path[i] = str[i];
-		i++;
+		path[a] = data[a];
+		a++;
 	}
-	ret_path[i] = '\0';
+	path[a] = '\0';
 }

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast5.c                                         :+:      :+:    :+:   */
+/*   raycasting_algo_5.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egermen <egermen@student.42kocaeli.com.tr>  #+#  +:+       +#+       */
+/*   By: ykarakur <ykarakur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-07 11:21:07 by egermen           #+#    #+#             */
-/*   Updated: 2024-12-07 11:21:07 by egermen          ###   ########.fr       */
+/*   Created: 2025/01/31 13:36:20 by ykarakur          #+#    #+#             */
+/*   Updated: 2025/01/31 14:06:52 by ykarakur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include <math.h>
 
-void	rotate2(t_game *g, double dir, double plane)
+void	rotate_2(t_game *g, double dir, double plane)
 {
 	if (g->p->left)
 	{

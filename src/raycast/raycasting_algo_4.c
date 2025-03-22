@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast4.c                                         :+:      :+:    :+:   */
+/*   raycasting_algo_4.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egermen <egermen@student.42kocaeli.com.tr>  #+#  +:+       +#+       */
+/*   By: ykarakur <ykarakur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-07 11:21:01 by egermen           #+#    #+#             */
-/*   Updated: 2024-12-07 11:21:01 by egermen          ###   ########.fr       */
+/*   Created: 2025/01/30 21:45:02 by ykarakur          #+#    #+#             */
+/*   Updated: 2025/01/31 14:08:27 by ykarakur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void	ft_mlx2(t_game *game, int c)
 {
 	if (!game->no->image || !game->so->image || !game->we->image
 		|| !game->ea->image)
-		return ((void)(ft_exit("file not opened", game, 1)));
+		return ((void)(exiting("file not opened", game, 1)));
 	game->no->addr = (int *)mlx_get_data_addr(game->no->image, &c, &c, &c);
 	game->so->addr = (int *)mlx_get_data_addr(game->so->image, &c, &c, &c);
 	game->we->addr = (int *)mlx_get_data_addr(game->we->image, &c, &c, &c);
 	game->ea->addr = (int *)mlx_get_data_addr(game->ea->image, &c, &c, &c);
 	if (!game->no->addr || !game->so->addr || !game->we->addr
 		|| !game->ea->addr)
-		return ((void)(ft_exit("file cannot read", game, 1)));
+		return ((void)(exiting("file cannot read", game, 1)));
 }
 
 void	ft_mlx(t_game *game, int a, int b)
@@ -35,27 +35,36 @@ void	ft_mlx(t_game *game, int a, int b)
 	game->so = malloc(sizeof(t_image));
 	game->we = malloc(sizeof(t_image));
 	game->ea = malloc(sizeof(t_image));
-	if (!game->image || !game->no || !game->so || !game->we || !game->ea)
-		return ((void)(ft_exit("Direction malloc error", game, 1)));
+	if (!game->image || !game->no || !game->so || !game->we
+		|| !game->ea)
+		return ((void)(exiting("Direction malloc error", game, 1)));
 	game->image->image = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if (!game->image->image)
-		return ((void)(ft_exit("image malloc error", game, 1)));
+		return ((void)(exiting("image malloc error", game, 1)));
 	game->image->addr = (int *)mlx_get_data_addr(game->image->image, &a, &a,
 			&a);
 	if (!game->image->addr)
-		return ((void)(ft_exit("image addr malloc error", game, 1)));
-	game->no->image = mlx_xpm_file_to_image(game->mlx, game->map->no_tex_path,
-			&b, &b);
-	game->so->image = mlx_xpm_file_to_image(game->mlx, game->map->so_tex_path,
-			&b, &b);
-	game->we->image = mlx_xpm_file_to_image(game->mlx, game->map->we_tex_path,
-			&b, &b);
-	game->ea->image = mlx_xpm_file_to_image(game->mlx, game->map->ea_tex_path,
-			&b, &b);
+		return ((void)(exiting("image addr malloc error", game, 1)));
+	game->no->image = mlx_xpm_file_to_image(game->mlx,
+			game->map->north_structure_path, &b, &b);
+	game->so->image = mlx_xpm_file_to_image(game->mlx,
+			game->map->south_structure_path, &b, &b);
+	game->we->image = mlx_xpm_file_to_image(game->mlx,
+			game->map->west_structure_path, &b, &b);
+	game->ea->image = mlx_xpm_file_to_image(game->mlx,
+			game->map->east_structure_path, &b, &b);
 	ft_mlx2(game, b);
 }
 
-int	move_release(int keyCode, t_game *game)
+void	wall_height_calculating(t_game *game)
+{
+	if (game->ray->side == 0)
+		wall_height_x_calculating(game);
+	else if (game->ray->side == 1)
+		wall_height_y_calculating(game);
+}
+
+int	action_drop(int keyCode, t_game *game)
 {
 	if (keyCode == KEY_W)
 		game->p->w = false;
@@ -70,12 +79,4 @@ int	move_release(int keyCode, t_game *game)
 	if (keyCode == KEY_LEFT)
 		game->p->left = false;
 	return (0);
-}
-
-void	calculate_wall_height(t_game *game)
-{
-	if (game->ray->side == 0)
-		calculate_wall_height_x(game);
-	else if (game->ray->side == 1)
-		calculate_wall_height_y(game);
 }

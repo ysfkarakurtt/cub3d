@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mustyilm <mustyilm@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: ykarakur <ykarakur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:18:54 by egermen           #+#    #+#             */
-/*   Updated: 2024/12/09 16:13:07 by mustyilm         ###   ########.fr       */
+/*   Created: 2025/01/31 13:37:03 by ykarakur          #+#    #+#             */
+/*   Updated: 2025/01/31 13:37:05 by ykarakur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 #include "cub3d.h"
 #include <stdlib.h>
 
-static void	check_arg(int ac, char *av, t_game *game)
+static void arg_checking(int ac, char *av, t_game *game)
 {
-	int		i;
+	int a;
 
 	if (ac != 2)
-		ft_exit("Wrong number of arguments", game, 1);
-	i = ft_strlen(av);
-	if (i < 10)
-		ft_exit("Wrong file name", game, 1);
-	if (av[i - 1] != 'b' || av[i - 2] != 'u'
-		|| av[i - 3] != 'c' || av[i - 4] != '.')
-		ft_exit("Wrong file extension", game, 1);
+		exiting("Wrong number of arguments", game, 1);
+	a = ft_strlen(av);
+	if (a < 10)
+		exiting("Wrong file name", game, 1);
+	if (av[a - 1] != 'b' || av[a - 2] != 'u' || av[a - 3] != 'c' || av[a - 4] != '.')
+		exiting("Wrong file extension", game, 1);
 }
 
-int	ft_mlx_exit(t_game	*game)
+int ft_mlx_exit(t_game *game)
 {
-	return (ft_exit("exit successful", game, 0));
+	return (exiting("exit successful", game, 0));
 }
 
-void	render_column(t_game *game, int x, int y)
+void column_rend(t_game *game, int x, int y)
 {
 	while (++y < HEIGHT)
 	{
@@ -46,25 +45,21 @@ void	render_column(t_game *game, int x, int y)
 		else
 		{
 			if (game->ray->side == 1 && game->ray->raydiry < 0)
-				game->image->addr[y * WIDTH + x] = game->no->addr[TEXHEIGHT
-					* game->ray->texy + game->ray->texx];
+				game->image->addr[y * WIDTH + x] = game->no->addr[TEXHEIGHT * game->ray->texy + game->ray->texx];
 			else if (game->ray->side == 1 && game->ray->raydiry >= 0)
-				game->image->addr[y * WIDTH + x] = game->so->addr[TEXHEIGHT
-					* game->ray->texy + game->ray->texx];
+				game->image->addr[y * WIDTH + x] = game->so->addr[TEXHEIGHT * game->ray->texy + game->ray->texx];
 			if (game->ray->side == 0 && game->ray->raydirx < 0)
-				game->image->addr[y * WIDTH + x] = game->we->addr[TEXHEIGHT
-					* game->ray->texy + game->ray->texx];
+				game->image->addr[y * WIDTH + x] = game->we->addr[TEXHEIGHT * game->ray->texy + game->ray->texx];
 			else if (game->ray->side == 0 && game->ray->raydirx >= 0)
-				game->image->addr[y * WIDTH + x] = game->ea->addr[TEXHEIGHT
-					* game->ray->texy + game->ray->texx];
+				game->image->addr[y * WIDTH + x] = game->ea->addr[TEXHEIGHT * game->ray->texy + game->ray->texx];
 			game->ray->texpos += game->step;
 		}
 	}
 }
 
-static void	init_flag(t_map *map)
+static void flag_init(t_map *map)
 {
-	t_flags	*flags;
+	t_flags *flags;
 
 	flags = (t_flags *)malloc(sizeof(t_flags));
 	if (!flags)
@@ -72,28 +67,28 @@ static void	init_flag(t_map *map)
 	map->flags = flags;
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	t_game		game;
-	t_map		map;
-	t_player	player;
-	t_ray		ray;
+	t_game game;
+	t_map map;
+	t_player player;
+	t_ray ray;
 
-	check_arg(ac, av[1], NULL);
+	arg_checking(ac, av[1], NULL);
 	game.map = &map;
-	init_flag(&map);
+	flag_init(&map);
 	game.p = &player;
 	game.ray = &ray;
 	map.map_file_path = av[1];
-	map_control(&map);
-	ray_init(&game);
+	controller_map(&map);
+	init_raycast(&game);
 	game.mlx = mlx_init();
 	if (game.mlx == NULL)
-		ft_exit("Failed to initialize MLX", &game, 1);
+		exiting("Failed to initialize MLX", &game, 1);
 	game.mlxwin = mlx_new_window(game.mlx, WIDTH, HEIGHT, "cub3D");
 	ft_mlx(&game, 0, 0);
 	mlx_hook(game.mlxwin, 2, 1L << 0, key_press, &game);
-	mlx_hook(game.mlxwin, 3, 1L << 1, move_release, &game);
+	mlx_hook(game.mlxwin, 3, 1L << 1, action_drop, &game);
 	mlx_hook(game.mlxwin, 17, 1L << 17, ft_mlx_exit, &game);
 	mlx_loop_hook(game.mlx, &gamefunc, &game);
 	mlx_loop(game.mlx);

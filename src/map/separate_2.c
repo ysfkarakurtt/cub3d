@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split2.c                                           :+:      :+:    :+:   */
+/*   separate_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egermen <egermen@student.42kocaeli.com.tr>  #+#  +:+       +#+       */
+/*   By: ykarakur <ykarakur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-07 11:22:50 by egermen           #+#    #+#             */
-/*   Updated: 2024-12-07 11:22:50 by egermen          ###   ########.fr       */
+/*   Created: 2025/01/30 21:41:43 by ykarakur          #+#    #+#             */
+/*   Updated: 2025/01/30 21:42:27 by ykarakur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_charlen(const char *s, char c)
+unsigned int char_length(const char *str, char c)
 {
-	unsigned int	i;
+	unsigned int a;
 
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	return (i);
+	a = 0;
+	while (str[a] && str[a] != c)
+		a++;
+	return (a);
 }

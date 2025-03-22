@@ -29,13 +29,13 @@ PID=""
 
 # to properly kill child process executed in background on exit
 at_exit() {
-	status=$?
-	[ $status -eq 0 ] && log_info "Seem all went well" && exit 0
+	case=$?
+	[ $case -eq 0 ] && log_info "Seem all went well" && exit 0
 	# Code for non-zero exit:
 	if ! kill -s TERM "$PID" 2>/dev/null || ! wait "$PID" ; then
-		log_error "Pid [$PID] died with status $status " 
+		log_error "Pid [$PID] died with case $case " 
 	fi
-	log_error "Something went wrong. Pid [$PID] has been killed. Status code $status"
+	log_error "Something went wrong. Pid [$PID] has been killed. Status code $case"
 }
 # to properly quit from ctrl+c (SIGINT Signal)
 sigint_handler(){

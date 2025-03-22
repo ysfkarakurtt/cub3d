@@ -1,47 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_control_utils.c                                :+:      :+:    :+:   */
+/*   controller_map_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egermen <egermen@student.42kocaeli.com.tr>  #+#  +:+       +#+       */
+/*   By: ykarakur <ykarakur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-07 11:21:56 by egermen           #+#    #+#             */
-/*   Updated: 2024-12-07 11:21:56 by egermen          ###   ########.fr       */
+/*   Created: 2025/01/31 13:51:31 by ykarakur          #+#    #+#             */
+/*   Updated: 2025/01/31 13:51:33 by ykarakur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include "../libft/libft.h"
-#include <fcntl.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
-static void	all_map_control(t_map *map, int i)
+static void controller_mapler_all(t_map *map, int x)
 {
-	map_so_control(map, i);
-	map_no_control(map, i);
-	map_we_control(map, i);
-	map_ea_control(map, i);
-	map_f_control(map, i);
-	map_c_control(map, i);
+	south_controller_mapler(map, x);
+	north_controller_mapler(map, x);
+	west_controller_mapler(map, x);
+	east_controller_mapler(map, x);
+	f_controller_mapler(map, x);
+	c_controller_mapler(map, x);
 }
 
-void	mapread(t_map *map)
+void read_map(t_map *map)
 {
-	char	*line;
-	char	*str;
+	char *str;
+	char *line;
 
 	map->map_file_fd = open(map->map_file_path, O_RDONLY);
 	if (map->map_file_fd == -1)
 	{
 		flag_free(map);
-		err_print_exit("Failed to open map file");
+		error_exit_printing("Failed to open map file");
 	}
 	map->one_line_map = NULL;
 	while (1)
 	{
 		line = get_next_line(map->map_file_fd);
 		if (!line)
-			break ;
+			break;
 		str = map->one_line_map;
 		map->one_line_map = ft_strjoin(str, line);
 		free(str);
@@ -52,67 +52,67 @@ void	mapread(t_map *map)
 	close(map->map_file_fd);
 }
 
-void	map_size(t_map *map)
+void map_dimension(t_map *map)
 {
-	int	i;
-	int	split_status;
+	int j;
+	int case_split;
 
-	split_status = -1;
+	case_split = -1;
 	map->map_file_height = 0;
-	map->map_file = ft_adv_split(map->one_line_map, '\n', &split_status);
+	map->map_file = split_adv(map->one_line_map, '\n', &case_split);
 	if (!map->map_file)
 		ft_err_mapcontrol("Map line split error", map, 1);
-	i = 0;
-	while (map->one_line_map[i])
+	j = 0;
+	while (map->one_line_map[j])
 	{
-		if (map->one_line_map[i] == '\n')
+		if (map->one_line_map[j] == '\n')
 			map->map_file_height++;
-		i++;
+		j++;
 	}
 }
 
-int	map_sixthcontrol(t_map *map)
+int controller_map_sixth(t_map *map)
 {
-	int	i;
-	int	j;
+	int a;
+	int b;
 
-	i = 0;
-	j = 0;
-	while (map->map_file_height > i && map->map_file[i])
+	a = 0;
+	b = 0;
+	while (map->map_file_height > a && map->map_file[a])
 	{
-		all_map_control(map, i);
+		controller_mapler_all(map, a);
 		if (map->flags->flag_count == 6 && map->flags->if_flag == 0)
 		{
 			map->flags->if_flag = 1;
-			j = i;
-			break ;
+			b = a;
+			break;
 		}
-		i++;
+		a++;
 	}
 	if (map->flags->flag_count != 6)
 		ft_err_mapcontrol("map have not 6 direction", map, 1);
-	if (wrong_name(map, j) == 0)
+	if (is_incorrect_name(map, b) == 0)
 		ft_err_mapcontrol("direction partition error", map, 1);
-	return (j);
+	return (b);
 }
 
-void	skip_spaces(t_map *map, int end)
+void space_jump(t_map *map, int end)
 {
-	int	space_counter;
+	int count;
 
 	end++;
-	space_counter = 0;
+	count = 0;
 	if (map->map_file[end] != NULL)
 	{
 		while (map->map_file[end])
 		{
-			space_counter = ft_skip_spaces(map->map_file[end], space_counter);
-			if (map->map_file[end][space_counter] == '\0')
+			count = ft_space_jump(map->map_file[end], count);
+			if (map->map_file[end][count] == '\0')
 				end++;
 			else
 			{
 				map->map_start = end;
-				break ;
+				break;
 			}
 		}
 		if (!map->map_file[end])

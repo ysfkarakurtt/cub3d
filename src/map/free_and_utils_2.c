@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_and_free2.c                                  :+:      :+:    :+:   */
+/*   free_and_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mustyilm <mustyilm@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: ykarakur <ykarakur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:21:18 by egermen           #+#    #+#             */
-/*   Updated: 2024/12/16 13:16:30 by mustyilm         ###   ########.fr       */
+/*   Created: 2025/01/30 21:37:43 by ykarakur          #+#    #+#             */
+/*   Updated: 2025/01/30 21:37:45 by ykarakur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "../cub3d.h"
 #include <stdio.h>
 
-void	free_array2d(char **str)
+void free_array2d(char **str)
 {
-	int	i;
+	int i;
 
 	if (!str)
-		return ;
+		return;
 	i = 0;
 	while (str && str[i] != NULL)
 	{
@@ -32,7 +32,7 @@ void	free_array2d(char **str)
 	str = NULL;
 }
 
-void	flag_free(t_map *map)
+void flag_free(t_map *map)
 {
 	if (map->flags)
 	{
@@ -41,9 +41,9 @@ void	flag_free(t_map *map)
 	}
 }
 
-int	all_spaces(char *str)
+int all_spaces(char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i] != '\n' && ((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
@@ -53,18 +53,17 @@ int	all_spaces(char *str)
 	return (0);
 }
 
-void	err_print_exit(char *str)
+void error_exit_printing(char *str)
 {
-	printf("%sError\n%s%s%s%s\n", RED, RESET, YELLOW, str, RESET);
+	printf("%sError\n%s%s%s%s\n", RED, RESET, BLUE, str, RESET);
 	exit(1);
 }
 
-int	ft_skip_spaces(char *str, int i)
+int ft_space_jump(char *str, int i)
 {
 	if (!str)
 		return (0);
-	while (str[i] != '\n'
-		&& ((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
+	while (str[i] != '\n' && ((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
 	{
 		i++;
 	}
